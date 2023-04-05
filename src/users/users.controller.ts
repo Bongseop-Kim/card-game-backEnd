@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Patch,
   Post,
   UseFilters,
   UseGuards,
@@ -53,5 +54,11 @@ export class UsersController {
   @Post('login')
   logIn(@Body() data: LoginRequestDto) {
     return this.authService.jwtLogIn(data);
+  }
+
+  @ApiOperation({ summary: '채널 변경' })
+  @Patch('setChannel')
+  async setChannel(@Body() data) {
+    await this.usersService.setChannel(data);
   }
 }

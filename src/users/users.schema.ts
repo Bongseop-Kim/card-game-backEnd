@@ -41,15 +41,18 @@ export class User extends Document {
     example: 'dessert',
     description: 'channel',
   })
+  @Prop({ default: 'lounge', required: true })
   @IsString()
   channel: string | null;
 
-  @ApiProperty({
-    example: '001',
-    description: 'room number',
-  })
-  @IsString()
-  position: string | null;
+  //TODO: 일단 굳이 백엔드에서 다룰 필요 없는 듯
+
+  // @ApiProperty({
+  //   example: '001',
+  //   description: 'room number',
+  // })
+  // @IsString()
+  // position: string | null;
 
   @ApiProperty({
     example: 0,
@@ -70,6 +73,7 @@ export class User extends Document {
   @ApiProperty({
     example: [1, 2, 3, 4],
     description: 'Cards owned by user',
+    default: [],
   })
   @IsNumber()
   cards: [number];
@@ -86,7 +90,6 @@ export class User extends Document {
     email: string;
     name: string;
     channel: string;
-    position: string | null;
     win: number;
     lose: number;
     cards: [number];
@@ -102,7 +105,6 @@ _UsersSchema.virtual('readOnlyData').get(function (this: User) {
     email: this.email,
     name: this.name,
     channel: this.channel,
-    position: this.position,
     win: this.win,
     lose: this.lose,
     cards: this.cards,

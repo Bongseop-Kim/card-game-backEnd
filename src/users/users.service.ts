@@ -26,4 +26,10 @@ export class UsersService {
     // 전달해 주고 싶은 데이터만 전달하기 위해 virtual을 이용한 가상의 readOnlyData를 보내준다.
     return user.readOnlyData;
   }
+
+  async setChannel(data) {
+    const user = await this.usersRepository.findUserByEmail(data.email);
+    user.channel = data.channel;
+    await user.save();
+  }
 }
